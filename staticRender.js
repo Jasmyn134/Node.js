@@ -3,7 +3,7 @@ var fs=require("fs");
 //接下来我们使用 http.createServer() 方法创建服务器，并使用 listen 方法绑定 8888 端口。
 //函数通过 request, response 参数来接收和响应数据。
 http.createServer(function(request,response){
-	
+	//req.url来进行路由设计
 	if(request.url=="/1"){
 		fs.readFile("./index.html",function(err,data){
 			//发送 HTTp 头部
