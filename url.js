@@ -20,8 +20,8 @@ http.createServer(function(request,response){
 	*	识别URL，用到两个新模块，第一个就是url模块，第二个就是querystring模块
 	 * 
 	 */
-			//HTTP状态值： 200 ：OK
-			//内容类型 ： text/plain
+	//HTTP状态值： 200 ：OK
+	//内容类型 ： text/plain
 			response.writeHead(200,{'Content-Type':'text/html;charset=UTF-8'});
 			//发送响应数据 “Hello World”
 			response.end("");
