@@ -2,6 +2,7 @@ var http = require("http");
 var url = require("url");
 
 var server = http.createServer(function(req,res){
+	response.writeHead(200,{'Content-Type':'text/html;charset=UTF-8'});
 	//得到查询部分，由于写了true，那么就是一个对象
 	var queryObj = url.parse(req.url,true).query;
 	var name = queryObj.name;
