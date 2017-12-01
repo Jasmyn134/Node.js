@@ -6,6 +6,9 @@ http.createServer(function(request,response){
 		if(request.url=='/favicon.ico'){
 			return;
 		}
+		
+		console.log("欢迎") //可能同时打印两个欢迎，证明了node是单线程异步的操作
+		
 		//当前文件下必须是     ./（在Linux平台下必须这样写，win平台下可以直接写文件或者文件名）   不能直接写文件或者文件名
 		fs.readFile("./index.html",function(err,data){
 			if(err){ throw err; }  //有异常会抛出异常，不执行下边的程序
@@ -14,6 +17,7 @@ http.createServer(function(request,response){
 			//内容类型 ： text/plain
 			response.writeHead(200,{'Content-Type':'text/html;charset=UTF-8'});
 			console.log(1)
+			console.log("end")
 			//发送响应数据 “Hello World”
 			response.end(data);
 		})
