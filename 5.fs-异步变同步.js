@@ -10,21 +10,21 @@ http.createServer(function(request,response){
 		fs.readdir("./album",function(err,files){
 			//files是一个数组，包含album中的所有文件和文件夹
 			//定义一个递归函数，自己调用自己
+			//迭代器就是强行把异步的函数，变成同步的函数，1.做完了，在做2
 			(function iterator(i){
 				if(i==files.length){
 					console.log(wenjianjia);
 					return;
 				}
-				console.log(files)
+//				console.log(files)
 				fs.stat("./album/"+files[i],function(err,stats){
 					console.log(stats.isDirectory())
 					if(stats.isDirectory()){
-						console.log("11111111")
 						wenjianjia.push(files[i]);
-						console.log(wenjianjia)
 					}
+					iterator(i+1);
 				});
-				iterator(i+1);
+				
 			})(0);
 		})
 		response.end("heyushuo")
