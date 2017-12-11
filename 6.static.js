@@ -13,8 +13,9 @@ http.createServer(function(req,res){
 		pathname="index.html"
 	}
 	//获取拓展名
-	var extname=path.extname;
-	var MINE=getMime(extname);
+	var extname=path.extname(pathname);
+    var MINE=getMime(extname);
+	console.log(MINE)
 	//读取这个文件
 	fs.readFile("./static/"+pathname,function(err,data){
 		if(err){
@@ -30,7 +31,7 @@ http.createServer(function(req,res){
 		//网页文件；   text/html
 		//jpg文件   image/jpg
 		//path.extname(p) 获取扩展名
-		
+
 		res.writeHead(200,{"Content-type":MINE});
 		res.end(data)
 	})
@@ -39,7 +40,7 @@ http.createServer(function(req,res){
 
 
 function getMime(extname){
-	switch (extname){
+	/*switch (extname){
 		case ".html":
 			return "text/html";
 			break;
@@ -49,5 +50,15 @@ function getMime(extname){
 		case ".css":
 			return "text/css";
 			break;
-	}
+	}*/
+    console.log(extname)
+	//同步读取文件
+	var data=fs.readFileSync("./mime.json",'utf-8');
+	data=JSON.parse(data);
+	for (var i in data) {
+        if (extname == i) {
+            return data[i];
+            console.log(data[i])
+        }
+    }
 }
