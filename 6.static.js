@@ -8,9 +8,12 @@ var path=require("path");
 http.createServer(function(req,res){
 	//得到用户的路径
 	var pathname=url.parse(req.url).pathname;
-	//默认首页
-	if(pathname=='/'){
+	//默认首页  判断输入的是否有点，没有点就默认打开当前文件夹中的index.html页面
+	/*if(pathname=='/'){
 		pathname="index.html"
+	}*/
+	if (pathname.indexOf(".")==-1){
+        pathname="index.html"
 	}
 	//获取拓展名
 	var extname=path.extname(pathname);
@@ -55,10 +58,14 @@ function getMime(extname){
 	//同步读取文件
 	var data=fs.readFileSync("./mime.json",'utf-8');
 	data=JSON.parse(data);
-	for (var i in data) {
-        if (extname == i) {
-            return data[i];
-            console.log(data[i])
-        }
-    }
+    return data[extname];
 }
+//回调函数的思路
+/*
+function getMime(extname,callback){
+    //同步读取文件
+    var data=fs.readFileSync("./mime.json",'utf-8');
+    data=JSON.parse(data);
+    //找不到会默认一个类型
+    callback(data[extname] || "text/plain');
+}*/
