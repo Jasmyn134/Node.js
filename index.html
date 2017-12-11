@@ -13,4 +13,25 @@
 <script type="text/javascript">
 	var userurl="/123456/"
 	console.log(userurl.substr(0,1))
+	
+	var a={
+		".html":"1",
+		".css":"2",
+		".js":"3",
+		".jpg":"4",
+		".doc":"5",
+		".md":"6",
+		}
+	
+//	a.forEach(function(index,ele){
+//		console.log(index);
+//	})
+	function hello(ccc){
+		for (var i in a) {
+			if(ccc==i){
+				return a[i];
+			}
+		}
+	}
+	console.log(hello(".css"))
 </script>
