@@ -17,7 +17,7 @@ app.use(express.static("./public"));
 app.get("/", function (req, res, next) {
     db.getAllCount("liuyanben",function(count){
         res.render("index",{
-            "pageamount" : Math.ceil(count / 20)
+            "pageamount" : Math.ceil(count / 5)
         });
     });
 });
@@ -26,8 +26,8 @@ app.get("/", function (req, res, next) {
 app.get("/du", function (req, res, next) {
     //可以接受一个参数
     var page = parseInt(req.query.page);
-
-    db.find("liuyanben",{},{"sort":{"shijian":-1},"pageamount":20,"page":page},function(err,result){
+	
+    db.find("liuyanben",{},{"sort":{"shijian":-1},"pageamount":5,"page":page},function(err,result){
         res.json({"result":result});
     });
 });
@@ -59,7 +59,7 @@ app.get("/shanchu",function(req,res,next){
     var id = req.query.id;
     db.deleteMany("liuyanben",{"_id":ObjectId(id)},function(err,result){
 
-        res.redirect("/");
+        res.redirect("/");//重定向回到根路径
     });
 })
 
