@@ -12,7 +12,7 @@ var studentSchema = new mongoose.Schema({
 studentSchema.statics.zhaoren = function(name, callback) {
     return this.model('Student').find({name: name}, callback);
 }
-
+//这样可以把对一个集合的所有操作都写在这个静态方法里
 // model
 var studentModel = mongoose.model('Student', studentSchema);
 
